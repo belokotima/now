@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta charset="UTF-8">
+    <title>CardChecker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card" id="app">
+
+        <!-- Здесь будет выводиться ЛОГОТИП БАНКА -->
+        <div class="bank">
+            <img :src='bank_logo'>
+        </div>
+
+        <!-- Поле для ввода НОМЕРА КАРТЫ -->
+        <div class="number-container">
+            <input type="text" placeholder="Номер карты" v-model='number' value='card_num' v-bind:class="{input_ok: ok, input_err: !ok}" >
+            <div class="status" v-bind:class="{status_ok: ok, status_err: !ok}"></div>
+        </div>
+
+        <!-- Поле для ввода ИМЕНИ ДЕРЖАТЕЛЯ -->
+        <div class="name-container">
+            <input type="text" placeholder="Имя держателя">
+            <div class="status"></div>
+        </div>
+
+        <!-- Логотип ПЛАТЕЖНОЙ СИСТЕМЫ -->
+        <div class="pay-system">
+            <img :src="logo">
+            
+        </div>
+        
+    </div>
+    
+</body>
+<script>
+        new Vue({
+                el:'#app',
+                data:{
+                number:'',
+                },
+               computed: {
+                   logo(){
+                    if (this.number[0]=='2')
+                       return 'img/systems/mir.png'
+                    if (this.number[0]=='3')
+                        return 'img/systems/american-exp.png'
+                    if (this.number[0]=='4')
+                        return 'img/systems/visa.png'
+                    if (this.number[0]=='5')
+                        return 'img/systems/mastercard.png'
+                    if (this.number[0]=='6')
+                        return  'img/systems/maestro.png'
+
+               },
+                    bank_logo(){
+                        b = this.number.substring(0, 6)
+                        b = parseInt(b)
+                       let alfabank=[521178
+,548673
+,548601
+,415428
+,676371
+,477964
+,479004]
+
+                       let vtb=[427229, 527883]
+
+                       let gazprom=[548999, 526483]
+
+                       let mtsbank=[533736
+,540616]
+                    let otkritie=[434146
+,405870
+,544573
+,532301]
+                       let rosbank=[440503
+,554761]
+                        let russkiystandart=[513691
+, 510047]
+                      let rayfaisen=[462730
+,462729]
+                       let sberbank=[427683
+,427901
+,427644
+,427601
+,427901
+,427631
+,427638
+,546938]
+                         let tinkoff=[521324
+,437773]
+                        banks_names = ['alfabank', 'vtb', 'gazprom', 'mtsbank', 'otkritie', 'rosbank', 'russkiystandart', 'rayfaisen', 'sberbank', 'tinkoff']
+                        banks = [alfabank, vtb, gazprom, mtsbank, otkritie, rosbank, russkiystandart, rayfaisen, sberbank, tinkoff]
+                        if (this.number.length>=6){
+                            let i = -1
+                            for(bank in banks){
+                                all_bins=banks[bank]
+                                i++
+                                
+                                for(bin in all_bins){
+                                    if (all_bins[bin]==b)
+                                    {
+                                        if (banks_names[i]==banks_names[0]){
+                                           return 'img/banks/alpha.png'
+                                        }
+                                        if (banks_names[i]==banks_names[2]){
+                                           return 'img/banks/gazprombank.png'
+                                        }
+                                        if (banks_names[i]==banks_names[3]){
+                                           return 'img/banks/mts-bank.png'
+                                        }
+                                        if (banks_names[i]==banks_names[4]){
+                                           return 'img/banks/otkrytie.png'
+                                        }
+                                        if (banks_names[i]==banks_names[7]){
+                                           return 'img/banks/raiffaizen.png'
+                                        }
+                                        if (banks_names[i]==banks_names[6]){
+                                           return 'img/banks/russian_standart.png'
+                                        }
+                                        if (banks_names[i]==banks_names[8]){
+                                           return 'img/banks/sberbank.png'
+                                        }
+                                        if (banks_names[i]==banks_names[5]){
+                                           return 'img/banks/rosbank.png'
+                                        }
+                                        if (banks_names[i]==banks_names[9]){
+                                           return 'img/banks/tinkoff.png'
+                                        }
+                                        if (banks_names[i]==banks_names[1]){
+                                           return 'img/banks/vtb.png'
+                                        }
+                                    
+                                    }
+                                }
+                            }
+                        }
+                    },
+               ok() {
+                if (this.number.length==16)
+                    return true
+                else
+                    return false
+           }
+               }
+        
+           })
+           </script>
+</html> 
